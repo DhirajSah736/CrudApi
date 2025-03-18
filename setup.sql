@@ -1,0 +1,13 @@
+CREATE DATABASE CrudApp;
+USE CrudApp;
+
+CREATE TABLE Recipes (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    RecipeName NVARCHAR(200) NOT NULL,
+    Ingredients NVARCHAR(MAX) NOT NULL,
+    Instructions NVARCHAR(MAX) NOT NULL,
+    Category NVARCHAR(100) NOT NULL
+);
+
+DELETE FROM Recipes;
+DBCC CHECKIDENT ('Recipes', RESEED, 0);
