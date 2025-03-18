@@ -37,15 +37,35 @@ namespace CrudApi.Controllers
 
         // PUT: api/recipes/{id}
         [HttpPut("{id}")]
+
         public async Task<IActionResult> UpdateRecipe(int id, Recipe recipe)
         {
             if (id != recipe.Id)
+            {
                 return BadRequest();
+            }
 
             _context.Entry(recipe).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Recipes.Any(e => e.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return NoContent();
         }
+
 
         // DELETE: api/recipes/{id}
         [HttpDelete("{id}")]
