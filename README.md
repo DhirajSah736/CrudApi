@@ -45,6 +45,7 @@ Update the **appsettings.json** file with your SQL Server connection string:
 ```
 Make sure to replace:
 - `DATABASE_NAME` → The name of your database
+ **Important:** In Microsoft SQL Management Studio, make sure to **set Encryption as Optional** in Connection Security and **check the Trust Server Certificate** option.
 
 ### 3️⃣ Run Database Migrations
 To apply migrations and create the database, run:
